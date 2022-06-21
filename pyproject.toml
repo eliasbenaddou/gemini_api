@@ -5,7 +5,7 @@ description = "A Python wrapper for the Gemini cryptocurrency exchange API"
 authors = ["Elias Benaddou Idrissi"]
 license = "MIT"
 repository = "https://github.com/eliasbenaddou/gemini_api"
-readme = "README.rst"
+readme = "README.md"
 include = [
     "LICENSE",
 ]
