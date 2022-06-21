@@ -143,8 +143,8 @@ Here is an example of creating a new order in the Sandbox test environment throu
 The class method 'new_order' will return an Order object and the 'order_id' attribute for the new order created is printed.
 
 ```python
-from gemini_api_wrapper.endpoints.order import Order
-from gemini_api_wrapper.authentication import Authentication
+from gemini_api.endpoints.order import Order
+from gemini_api.authentication import Authentication
 
 auth = Authentication(
     sandbox=True,
@@ -164,7 +164,7 @@ if __name__ == "__main__":
     print(x.order_id)
 ```
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For more examples, please refer to the [Documentation](https://github.com/eliasbenaddou/gemini_api)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
