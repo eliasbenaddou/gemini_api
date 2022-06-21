@@ -4,7 +4,7 @@ import hmac
 import json
 import time
 from datetime import datetime
-from typing import Any, Dict
+from typing import Any, Dict, Union
 
 import requests
 import yaml
@@ -15,10 +15,10 @@ GEMINI_REQUEST_BASE_URL = "https://api.gemini.com"
 
 class Authentication(object):
     """
-    Class to authenticate authentication.
+    Class to manage authentication.
 
     Class provides methods to authenticate and make requests to
-    Gemini's Private REST API.
+    Gemini's APIs
 
     Attributes:
         _public_key: a public key for authentication
@@ -51,8 +51,8 @@ class Authentication(object):
             self._url = GEMINI_REQUEST_BASE_URL
 
     def make_request(
-        self, endpoint: str, payload: Dict[str, str] = None
-    ) -> Dict[str, Any]:
+        self, endpoint: str, payload: Dict[str, Any] = None
+    ) -> Union[Dict[str, Any], Any]:
         """
         Makes a request to an endpoint in the API
 
