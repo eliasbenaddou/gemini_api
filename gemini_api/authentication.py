@@ -51,8 +51,8 @@ class Authentication(object):
             self._url = GEMINI_REQUEST_BASE_URL
 
     def make_request(
-        self, endpoint: str, payload: Dict[str, Any] = None
-    ) -> Union[Dict[str, Any], Any]:
+        self, endpoint: str, payload: Dict[Any, Any] = None
+    ) -> Union[Dict[Any, Any], Any]:
         """
         Makes a request to an endpoint in the API
 

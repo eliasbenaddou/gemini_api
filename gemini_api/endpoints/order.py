@@ -1,4 +1,3 @@
-# type: ignore
 from __future__ import annotations
 
 from typing import Any, Dict, List, Optional, Union
@@ -565,7 +564,7 @@ class Order:
         """
         path = "/v1/order/new"
 
-        data: Union[Dict[str, Any], Any] = {
+        data: Union[Dict[Any, Any], Any] = {
             "symbol": symbol,
             "amount": amount,
             "price": price,
