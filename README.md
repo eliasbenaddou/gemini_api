@@ -111,12 +111,10 @@ You'll need to have Python 3.6 or above. Package dependencies are listed in the 
 
 2. Install package
 ```python
-pip install gemini_api_wrapper
+pip install gemini_api
 ```
 
-3. Rename the template config file to `config_variables.yml` and enter your API keys
-
-4. Stack some sats programmatically 😎
+3. Stack some sats programmatically 😎
 
 If you would like to edit the source code yourself
 
@@ -138,7 +136,7 @@ If you would like to edit the source code yourself
 <!-- USAGE EXAMPLES -->
 ## Usage Examples
 
-Here is an example of creating a new order in the Sandbox test environment through the Order Placement API by instantiatng a new Authentication object and providing it to the Order class.
+Here is an example of creating a new order in the Sandbox test environment through the Order Placement API by instantiatng a new Authentication object with your public and private key and providing it to the Order class.
 
 The class method 'new_order' will return an Order object and the 'order_id' attribute for the new order created is printed.
 
@@ -147,7 +145,7 @@ from gemini_api.endpoints.order import Order
 from gemini_api.authentication import Authentication
 
 auth = Authentication(
-    sandbox=True,
+    public_key="XXXXXXXXXX", private_key="XXXXXXXXXX", sandbox=True,
 )
 
 

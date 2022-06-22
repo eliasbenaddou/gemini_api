@@ -7,7 +7,6 @@ from datetime import datetime
 from typing import Any, Dict, Union
 
 import requests
-import yaml
 
 GEMINI_SANDBOX_BASE_URL = "https://api.sandbox.gemini.com"
 GEMINI_REQUEST_BASE_URL = "https://api.gemini.com"
@@ -31,7 +30,9 @@ class Authentication(object):
 
     __slots__ = ["_public_key", "_private_key", "_url"]
 
-    def __init__(self, sandbox: bool = False) -> None:
+    def __init__(
+        self, public_key: str, private_key: str, sandbox: bool = False
+    ) -> None:
         """
         Initialise authentication
 
@@ -39,11 +40,8 @@ class Authentication(object):
             sandbox: flag for connecting to Sandbox environment
         """
 
-        with open("config_variables.yml", "r") as f:
-            keys = yaml.safe_load(f)
-
-        self._public_key: str = keys.get("public_key")
-        self._private_key: str = keys.get("private_key")
+        self._public_key: str = public_key
+        self._private_key: str = private_key
 
         if sandbox:
             self._url = GEMINI_SANDBOX_BASE_URL
