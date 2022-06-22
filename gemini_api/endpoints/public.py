@@ -172,11 +172,12 @@ class Public:
         """
 
         if not since:
-            data = requests.get(self.url + "/auction/" + pair)
+            data = requests.get(self.url + "/auction/" + pair + "/history")
         else:
             self.timestamp = date_to_unix_ts(since)
             data = requests.get(
-                self.url + "/auction/{}?since={}".format(pair, self.timestamp)
+                self.url
+                + "/auction/history/{}?since={}".format(pair, self.timestamp)
             )
 
         auction_history = data.json()
