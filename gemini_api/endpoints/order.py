@@ -551,10 +551,7 @@ class Order:
             symbol: Trading pair
             amount: Quoted decimal amount to purchase
             price: Quoted decimal amount to spend per unit
-            options: Option of order execution, "maker-or-cancel",
-            "immediate-or-cancel", "fill-or-kill",
-            "auction-only", "indication-of-interest". If None,
-            defaults to standard limit order.
+            options: Option of order execution, defaults to limit order
             stop_price: The price to trigger a stop-limit order
             stop_limit: True if stop_price is provided
             client_order_id: Client-specified order if
@@ -621,10 +618,6 @@ class Order:
             amount: Amount of currency to purchase
             side: Either "buy" or "sell"
             symbol: Trading pair
-            options: Option of order execution, "maker-or-cancel",
-            "immediate-or-cancel", "fill-or-kill",
-            "auction-only", "indication-of-interest". If None, defaults
-            to standard limit order.
             client_order_id: Client-specified order id
 
         Returns:
@@ -738,12 +731,13 @@ class Order:
         """
         Method to get order status
 
+        The order id to get information on - cannot be
+        used in combination with client_order_id
+
         Args:
             auth: Gemini authentication object
-            order_id: The order id to get information on - cannot be
-            used in combination with client_order_id
-            include_trades: If True, will return trade details of all
-            fills from the order
+            order_id: The order id
+            include_trades: Include trade details of all fills from the order
             client_order_id: Client-specified order
 
         Returns:
@@ -801,10 +795,8 @@ class Order:
         Args:
             auth: Gemini authentication object
             symbol: Trading pair
-            since: Optional - only return transfers on or after
-            this date in YYYYMMDD format otherwise most recent orders
-            limit_trades: Maximum number of trades to return - Default
-            is 50, max is 500
+            since: Date in YYYYMMDD format
+            limit_trades: Maximum number of trades to return, min 50 max 500
 
         Returns:
             List of Order objects

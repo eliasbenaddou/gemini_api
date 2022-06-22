@@ -84,17 +84,19 @@ class FXRate:
         """
         Method to get the fx rate
 
+        Timestamp is rounded to the closest timestamp received for an
+        update from BCB
+
         Args:
             auth: Gemini authentication object
             symbol: Trading pair
-            timestamp: The timestamp to pull the FX rate for - rounded
-            to the closest timestamp received for an update from BCB
+            since: Date in YYYYMMDD format
 
         Returns:
             FXRate object
         """
-        timestamp = date_to_unix_ts(since)
-        path = f"/v2/fxrate/{symbol}/{timestamp}"
+        date_unix = date_to_unix_ts(since)
+        path = f"/v2/fxrate/{symbol}/{date_unix}"
 
         res = auth.make_request(endpoint=path)
         return FXRate(auth=auth, fx_rate_data=res)

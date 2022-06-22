@@ -189,7 +189,7 @@ _For more examples, please refer to the [Documentation](https://github.com/elias
     - [x] Order Status
     - [x] Get Active Orders
     - [x] Get Past Orders
-- [x] Fee and Volume APIS
+- [x] Fee and Volume APIs
     - [x] Get Notional Volume
     - [x] Get Trade Volume
 - [x] FX Rate API

@@ -56,7 +56,7 @@ class Authentication(object):
 
         Args:
             endpoint: String to add to base URL
-            paylod: Data to pass into encoded payload
+            payload: Data to pass into encoded payload
 
         Returns:
             Dictionary containing response data

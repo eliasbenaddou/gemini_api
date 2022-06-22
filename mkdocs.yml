@@ -1,0 +1,12 @@
+site_name: Gemini API Docs
+theme:
+  name: material
+
+plugins:
+  - mkdocstrings
+
+nav:
+  - Gemini API Docs: index.md
+  - Usage Guide: usage_guide.md
+  - Reference: reference.md
+  - About: explanation.md

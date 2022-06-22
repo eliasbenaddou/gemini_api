@@ -563,8 +563,8 @@ class FundManagement:
 
         Args:
             auth: Gemini authentication object
-            currency: supported three-letter fiat currency code,
-            e.g. "usd" or "gbp"
+            currency: supported three-letter fiat currency code
+
 
         Returns:
             List of FundManagement object
@@ -595,18 +595,16 @@ class FundManagement:
         Method to get transfers - shows deposits and withdrawals in the
         supported currencies. When deposits show as Advanced or Complete
         status, they are available for trading.
+
         This method does not currently show cancelled advances,
         returned outgoing wires or ACH transactions,
         or other exceptional transaction circumstances.
 
         Args:
             auth: Gemini authentication object
-            since: Optional - only return transfers on or after
-            this date in YYYYMMDD format
-            show_completed_deposit_advances: Whether to display
-            complted deposit advances
-            limit_transfers: Optional - the maximum nmber of transfers
-            to return. The default is 10 and the maximum is 50
+            since: Date in YYYYMMDD format
+            show_completed_deposit_advances: Display completed deposit advances
+            limit_transfers: The maximum number of transfers to return
             currency: Currency code symbols
 
         Returns:
@@ -650,10 +648,8 @@ class FundManagement:
 
         Args:
             auth: Gemini authentication object
-            since: Optional - only return transfers on or after
-            this date in YYYYMMDD format
-            limit_transfers: Optional - the maximum nmber of transfers
-            to return. The default is 10 and the maximum is 50
+            since: Date in YYYYMMDD format
+            limit_transfers: The maximum nmber of transfers to return
 
         Returns:
             List of FundManagement object
@@ -685,12 +681,13 @@ class FundManagement:
         """
         Method to get deposit address
 
+        The network can be bitcoin, ethereum, bitcoincash, litecoin,
+        zcash, filecoin, dogecoin, tezos, or solana
+
         Args:
             auth: Gemini API authentication object
-            network: Can be bitcoin, ethereum, bitcoincash, litecoin,
-            zcash, filecoin, dogecoin, tezos, or solana
-            since: Optional - only return transfers on or after
-            this date in YYYYMMDD format
+            network: e.g. bitcoin
+            since: Date in YYYYMMDD format
 
         Returns:
             List of FundManagement object
@@ -725,15 +722,15 @@ class FundManagement:
         """
         Method to get custody fee records
 
+        The network can be bitcoin, ethereum, bitcoincash, litecoin,
+        zcash, filecoin, dogecoin, tezos, or solana
+
         Args:
             auth: Gemini authentication object
-            network: Can be bitcoin, ethereum, bitcoincash, litecoin,
-            zcash, filecoin, dogecoin, tezos, or solana
+            network: e.g. bitcoin
             label: The label for the new address if provided on creation
-            since: Optional - only return transfers on or after
-            this date in YYYYMMDD format
-            legacy: Optional - whether to generate a legacy P2SH-P2PKH
-            litecoin address
+            since: Date in YYYYMMDD format
+            legacy: Whether to generate a legacy P2SH-P2PKH litecoin address
 
         Returns:
             Fundmanagement object
@@ -771,8 +768,7 @@ class FundManagement:
             currency: Currency code symbols
             address: Standard string format of cryptocurrency address
             amount: Quoted decimal amount to withdraw
-            client_transfer_id: Optional - a unique identifier for the
-            withdrawal, in uuid4 format
+            client_transfer_id: Unique identifier for withdrawal, uuid4 format
 
         Returns:
             FundManagement object
@@ -808,8 +804,8 @@ class FundManagement:
             auth: Gemini authentication object
             address: Standard string format of cryptocurrency address
             amount: Quoted decimal amount to withdraw
-            currency: currency code of a supported crypto-currency, e.g. eth
-            account: The name of the account within the subaccount group.
+            currency: Currency code of a supported crypto-currency, e.g. eth
+            account: The name of the account within the subaccount group
 
         Returns:
             FundManagement object
@@ -839,10 +835,8 @@ class FundManagement:
             auth: Gemini authentication object
             accountnumber: Account number of bank account to be added
             routing: Routing number of bank account to be added
-            type: Type of bank account to be added - accepts "checking"
-            or "savings"
-            name: The name of the bank account as shown on your account
-            statements
+            type: Type of bank account to be added
+            name: Name of the bank account as shown on your account statements
 
 
         Returns:
@@ -880,11 +874,9 @@ class FundManagement:
             auth: Gemini authentication object
             swiftcode: The account SWIFT code
             accountnumber: Account number of bank account to be added
-            type: Type of bank account to be added - accepts "checking"
-            or "savings"
-            institutionnumber: Optional - the institution number of the
-            account
-            branchnumber: Optional - the branch number
+            type: Type of bank account to be added
+            institutionnumber: the institution number of the account
+            branchnumber: The branch number
 
         Returns:
             FundManagement object
