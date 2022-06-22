@@ -19,9 +19,9 @@
   <p align="center">
     A Python wrapper for the cyrptocurrency exchange Gemini.
     <br />
-    <a href="https://github.com/eliasbenaddou/gemini_api"><strong>Explore the docs »</strong></a>
+    <a href="https://eliasbenaddou.github.io/gemini_api"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="https://github.com/eliasbenaddou/gemini_api">View Blog Post</a>
+    <a href="https://eliasbenaddouidrissi.com">View Blog Post</a>
     ·
     <a href="https://github.com/eliasbenaddou/gemini_api/issues">Report Bug/Request Feature</a>
   </p>
@@ -162,7 +162,7 @@ if __name__ == "__main__":
     print(x.order_id)
 ```
 
-_For more examples, please refer to the [Documentation](https://github.com/eliasbenaddou/gemini_api)_
+_For more examples, please refer to the [Documentation](https://eliasbenaddou.github.io/gemini_api/)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
