@@ -46,6 +46,9 @@ class FeeVolume:
         "_sell_taker_base",
         "_sell_taker_notional",
         "_sell_taker_count",
+        "_result",
+        "_reason",
+        "_message",
     ]
 
     def __init__(
@@ -128,6 +131,12 @@ class FeeVolume:
             ]
         if "sell_taker_count" in volume_data:
             self._sell_taker_count: float = volume_data["sell_taker_count"]
+        if "result" in volume_data:
+            self._result: str = volume_data["result"]
+        if "reason" in volume_data:
+            self._reason: str = volume_data["reason"]
+        if "message" in volume_data:
+            self._message: str = volume_data["message"]
 
     @property
     def date(self) -> str:
@@ -475,6 +484,36 @@ class FeeVolume:
             Number of trades for this day
         """
         return self.sell_taker_count
+
+    @property
+    def result(self) -> str:
+        """
+        Property for the result upon errors or the state of a request
+
+        Returns:
+            Result
+        """
+        return self._result
+
+    @property
+    def reason(self) -> str:
+        """
+        Property for the reason of errors
+
+        Returns:
+            Short error description
+        """
+        return self._reason
+
+    @property
+    def message(self) -> str:
+        """
+        Property for the error message
+
+        Returns:
+            Error message description
+        """
+        return self._message
 
     @classmethod
     def get_notional_volume(cls, auth: Authentication) -> Optional[FeeVolume]:

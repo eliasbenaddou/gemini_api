@@ -24,6 +24,12 @@ class FXRate:
         self._as_of: int = fx_rate_data["asOf"]
         self._provider: str = fx_rate_data["provider"]
         self._benchmark: str = fx_rate_data["benchmark"]
+        if "result" in fx_rate_data:
+            self._result: str = fx_rate_data["result"]
+        if "reason" in fx_rate_data:
+            self._reason: str = fx_rate_data["reason"]
+        if "message" in fx_rate_data:
+            self._message: str = fx_rate_data["message"]
 
     @property
     def fx_pair(self) -> str:
@@ -76,6 +82,36 @@ class FXRate:
             Market
         """
         return self._benchmark
+
+    @property
+    def result(self) -> str:
+        """
+        Property for the result upon errors or the state of a request
+
+        Returns:
+            Result
+        """
+        return self._result
+
+    @property
+    def reason(self) -> str:
+        """
+        Property for the reason of errors
+
+        Returns:
+            Short error description
+        """
+        return self._reason
+
+    @property
+    def message(self) -> str:
+        """
+        Property for the error message
+
+        Returns:
+            Error message description
+        """
+        return self._message
 
     @classmethod
     def get_fx_rate(

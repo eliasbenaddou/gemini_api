@@ -52,7 +52,9 @@ class Order:
         "_is_auction_fill",
         "_is_clearing_fill",
         "_break_type",
+        "_reason",
         "_result",
+        "_message",
     ]
 
     def __init__(
@@ -100,8 +102,6 @@ class Order:
             self._is_live: bool = order_data["is_cancelled"]
         if "is_cancelled" in order_data:
             self._is_cancelled = order_data["is_cancelled"]
-        if "reason" in order_data:
-            self._reason: str = order_data["reason"]
         if "is_hidden" in order_data:
             self._is_hidden: bool = order_data["is_hidden"]
         if "was_forced" in order_data:
@@ -154,6 +154,10 @@ class Order:
             self._break_type: str = order_data["break"]
         if "result" in order_data:
             self._result: str = order_data["result"]
+        if "reason" in order_data:
+            self._reason: str = order_data["reason"]
+        if "message" in order_data:
+            self._message: str = order_data["message"]
 
     @property
     def order_id(self) -> Union[str, Dict[int, bool]]:
@@ -529,6 +533,36 @@ class Order:
             Result
         """
         return self._result
+
+    @property
+    def result(self) -> str:
+        """
+        Property for the result upon errors or the state of a request
+
+        Returns:
+            Result
+        """
+        return self._result
+
+    @property
+    def reason(self) -> str:
+        """
+        Property for the reason of errors
+
+        Returns:
+            Short error description
+        """
+        return self._reason
+
+    @property
+    def message(self) -> str:
+        """
+        Property for the error message
+
+        Returns:
+            Error message description
+        """
+        return self._message
 
     @classmethod
     def new_order(

@@ -46,6 +46,7 @@ class FundManagement:
         "_reference_id",
         "_result",
         "_reason",
+        "_message",
         "_balances",
         "_banks",
     ]
@@ -119,8 +120,6 @@ class FundManagement:
                 self._fee = fund_data["fee"]
         if "withdrawalID" in fund_data:
             self._withdrawal_id: str = fund_data["withdrawalID"]
-        if "message" in fund_data:
-            self._message: str = fund_data["message"]
         if "isOverride" in fund_data:
             self._is_override: bool = fund_data["is_override"]
         if "monthlyLimit" in fund_data:
@@ -137,6 +136,8 @@ class FundManagement:
             self._result: str = fund_data["result"]
         if "reason" in fund_data:
             self._reason: str = fund_data["reason"]
+        if "message" in fund_data:
+            self._message: str = fund_data["message"]
 
     @property
     def currency(self) -> str:
@@ -434,10 +435,11 @@ class FundManagement:
     def message(self) -> str:
         """
         Property for the human-readable English message describing
-        the withdrawal - only shown for BTC, ZEC, LTC and BCH withdrawals
+        the withdrawal - only shown for BTC, ZEC, LTC and BCH withdrawals.
+        Also can be the error message description for failed requests.
 
         Returns:
-            address
+            Message
         """
         return self._message
 
