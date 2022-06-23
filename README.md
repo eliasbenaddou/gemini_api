@@ -108,6 +108,7 @@ The package is available on PyPI and can be installed using pip or poetry.
 You'll need to have Python 3.6 or above. Package dependencies are listed in the poetry.lock file.
 
 1. Sign in to Gemini and get API Keys [https://exchange.gemini.com/](https://exchange.gemini.com/)
+Note that this is for the real account - if you want to use the Sandbox Gemini account for testing, signup for a separate Sandbox account and create your keys there [https://exchange.sandbox.gemini.com/](https://exchange.sandbox.gemini.com/)
 
 2. Install package
 ```python

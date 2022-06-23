@@ -45,6 +45,7 @@ class FundManagement:
         "_monthly_remaining",
         "_reference_id",
         "_result",
+        "_reason",
         "_balances",
         "_banks",
     ]
