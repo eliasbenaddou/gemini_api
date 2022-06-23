@@ -11,7 +11,16 @@ class FXRate:
     Class for FX Rate historical reference
     """
 
-    __slots__ = ["_fx_pair", "_rate", "_as_of", "_provider", "_benchmark"]
+    __slots__ = [
+        "_fx_pair",
+        "_rate",
+        "_as_of",
+        "_provider",
+        "_benchmark",
+        "_result",
+        "_message",
+        "_reason",
+    ]
 
     def __init__(
         self, auth: Authentication, fx_rate_data: Dict[str, Any]
@@ -19,11 +28,16 @@ class FXRate:
         """
         Initialise FXRate class
         """
-        self._fx_pair: str = fx_rate_data["fxPair"]
-        self._rate: str = fx_rate_data["rate"]
-        self._as_of: int = fx_rate_data["asOf"]
-        self._provider: str = fx_rate_data["provider"]
-        self._benchmark: str = fx_rate_data["benchmark"]
+        if "fxPair" in fx_rate_data:
+            self._fx_pair: str = fx_rate_data["fxPair"]
+        if "rate" in fx_rate_data:
+            self._rate: str = fx_rate_data["rate"]
+        if "asOf" in fx_rate_data:
+            self._as_of: int = fx_rate_data["asOf"]
+        if "provider" in fx_rate_data:
+            self._provider: str = fx_rate_data["provider"]
+        if "benchmark" in fx_rate_data:
+            self._benchmark: str = fx_rate_data["benchmark"]
         if "result" in fx_rate_data:
             self._result: str = fx_rate_data["result"]
         if "reason" in fx_rate_data:
