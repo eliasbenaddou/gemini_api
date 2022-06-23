@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gemini_api"
-version = "0.1.1"
+version = "0.1.2"
 description = "A Python wrapper for the Gemini cryptocurrency exchange API"
 authors = ["Elias Benaddou Idrissi"]
 license = "MIT"
