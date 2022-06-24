@@ -99,7 +99,7 @@ class Order:
                 "trades"
             ]
         if "is_live" in order_data:
-            self._is_live: bool = order_data["is_cancelled"]
+            self._is_live: bool = order_data["is_live"]
         if "is_cancelled" in order_data:
             self._is_cancelled = order_data["is_cancelled"]
         if "is_hidden" in order_data:
