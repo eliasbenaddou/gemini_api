@@ -243,7 +243,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Disclaimer
 
-This package connects to a live crytpcurrency exchange and the user takes full responsibility when using it. I am not liable for any costs or errors due to incorrect code or unanticipated actions. Use the Sandbox environment first to get familiar with the code and check it performs the expected actions.
+This package connects to a live cryptocurrency exchange and the user takes full responsibility when using it. I am not liable for any costs or errors due to incorrect code or unanticipated actions. Use the Sandbox environment first to get familiar with the code and check it performs the expected actions.
 
 If the user is not comfortable accepting the risks that come with using this program then they should not use it. It is licensed under an MIT license so you are free to dissect and use any part of this codebase as you wish.
 
