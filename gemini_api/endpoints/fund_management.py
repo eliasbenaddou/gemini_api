@@ -15,35 +15,34 @@ class FundManagement:
         "_currency",
         "_amount",
         "_available",
-        "_available_for_withdrawal",
+        "_availableForWithdrawal",
         "_type",
-        "_amount_notional",
-        "_available_notional",
-        "_available_for_withdrawal_notional",
+        "_amountNotional",
+        "_availableNotional",
+        "_availableForWithdrawalNotional",
         "_status",
         "_timestampms",
         "_eid",
-        "_advance_eid",
-        "_fee_amount",
+        "_advanceEid",
+        "_feeAmount",
         "_fee_currency",
         "_method",
         "_tx_hash",
         "_outputidx",
         "_destination",
         "_purpose",
-        "_tx_time",
-        "_account_id",
-        "_event_id" "_event_type",
+        "_txTime",
+        "_eventType",
         "_address",
         "_label",
         "_network",
         "_fee",
-        "_withdrawal_id",
+        "_withdrawalId",
         "_message",
-        "_is_override",
-        "_monthly_limit",
-        "_monthly_remaining",
-        "_reference_id",
+        "_isOverride",
+        "_monthlyLimit",
+        "_monthlyRemaining",
+        "_referenceId",
         "_result",
         "_reason",
         "_message",
@@ -64,17 +63,17 @@ class FundManagement:
         if "available" in fund_data:
             self._available: float = fund_data["available"]
         if "availableForWithdrawal" in fund_data:
-            self._available_for_withdrawal: float = fund_data[
+            self._availableForWithdrawal: float = fund_data[
                 "availableForWithdrawal"
             ]
         if "type" in fund_data:
             self._type: str = fund_data["type"]
         if "amountNotional" in fund_data:
-            self._amount_notional: float = fund_data["amountNotional"]
+            self._amountNotional: float = fund_data["amountNotional"]
         if "availableNotional" in fund_data:
-            self._available_notional: float = fund_data["availableNotional"]
+            self._availableNotional: float = fund_data["availableNotional"]
         if "availableForWithdrawalNotional" in fund_data:
-            self._available_for_withdrawal_notional: float = fund_data[
+            self._availableForWithdrawalNotional: float = fund_data[
                 "availableForWithdrawalNotional"
             ]
         if "status" in fund_data:
@@ -84,15 +83,15 @@ class FundManagement:
         if "eid" in fund_data:
             self._eid: int = fund_data["eid"]
         if "advanceEid" in fund_data:
-            self._advance_eid: int = fund_data["advanceEid"]
+            self._advanceEid: int = fund_data["advanceEid"]
         if "feeAmount" in fund_data:
-            self._fee_amount: int = fund_data["feeAmount"]
+            self._feeAmount: int = fund_data["feeAmount"]
         if "feeCurrency" in fund_data:
-            self._fee_currency: str = fund_data["feeCurrency"]
+            self._feeCurrency: str = fund_data["feeCurrency"]
         if "method" in fund_data:
             self._method: str = fund_data["method"]
         if "txHash" in fund_data:
-            self._tx_hash: str = fund_data["txHash"]
+            self._txHash: str = fund_data["txHash"]
         if "outputIdx" in fund_data:
             self._outputidx: int = fund_data["outputidx"]
         if "destination" in fund_data:
@@ -100,13 +99,9 @@ class FundManagement:
         if "purpose" in fund_data:
             self._purpose: str = fund_data["purpose"]
         if "txTime" in fund_data:
-            self._tx_time: str = fund_data["txTime"]
-        if "accountId" in fund_data:
-            self._account_id: int = fund_data["accountId"]
-        if "eventId" in fund_data:
-            self._event_id: int = fund_data["eventId"]
+            self._txTime: str = fund_data["txTime"]
         if "eventType" in fund_data:
-            self._event_type: str = fund_data["eventType"]
+            self._eventType: str = fund_data["eventType"]
         if "address" in fund_data:
             self._address: str = fund_data["address"]
         if "label" in fund_data:
@@ -119,15 +114,15 @@ class FundManagement:
             else:
                 self._fee = fund_data["fee"]
         if "withdrawalID" in fund_data:
-            self._withdrawal_id: str = fund_data["withdrawalID"]
+            self._withdrawalID: str = fund_data["withdrawalID"]
         if "isOverride" in fund_data:
-            self._is_override: bool = fund_data["is_override"]
+            self._isOverride: bool = fund_data["isOverride"]
         if "monthlyLimit" in fund_data:
-            self._monthly_limit: int = fund_data["monthly_limit"]
+            self._monthlyLimit: int = fund_data["monthlyLimit"]
         if "montlyRemaining" in fund_data:
-            self._monthly_remaining: int = fund_data["montly_remaining"]
+            self._monthlyRemaining: int = fund_data["montlyRemaining"]
         if "referenceId" in fund_data:
-            self._reference_id: str = fund_data["reference_id"]
+            self._referenceId: str = fund_data["referenceId"]
         if "balances" in fund_data:
             self._balances: List[Dict[str, str]] = fund_data["balances"]
         if "banks" in fund_data:
@@ -170,17 +165,17 @@ class FundManagement:
         return self._available
 
     @property
-    def available_for_withdrawal(self) -> float:
+    def availableForWithdrawal(self) -> float:
         """
         Property for the amount that is available to withdraw
 
         Returns:
             Amount available to withdraw
         """
-        return self._available_for_withdrawal
+        return self._availableForWithdrawal
 
     @property
-    def account_transfer_type(self) -> str:
+    def type(self) -> str:
         """
         Property for the type of account (always "exchange") or the
         transfer type (either "Deposit" or "Withdrawal")
@@ -191,34 +186,34 @@ class FundManagement:
         return self._type
 
     @property
-    def amount_notional(self) -> float:
+    def amountNotional(self) -> float:
         """
         Property for the amount in notional
 
         Returns:
             Notional amount
         """
-        return self._amount_notional
+        return self._amountNotional
 
     @property
-    def available_notional(self) -> float:
+    def availableNotional(self) -> float:
         """
         Property for the amount available to trade in notional
 
         Returns:
             Amount available in notional
         """
-        return self._available_notional
+        return self._availableNotional
 
     @property
-    def available_for_withdrawal_notional(self) -> float:
+    def availableForWithdrawalNotional(self) -> float:
         """
         Property for the amount available to withdraw in notional
 
         Returns:
             Amount available to withdraw in notional
         """
-        return self._available_for_withdrawal_notional
+        return self._availableForWithdrawalNotional
 
     @property
     def status(self) -> str:
@@ -253,34 +248,34 @@ class FundManagement:
         return self._eid
 
     @property
-    def advance_eid(self) -> int:
+    def advanceEid(self) -> int:
         """
         Property for the deposit advance event id
 
         Returns:
             Deposit advance event id
         """
-        return self._advance_eid
+        return self._advanceEid
 
     @property
-    def fee_amount(self) -> float:
+    def feeAmount(self) -> float:
         """
         Property for the fee amount charged
 
         Returns:
             Fee amount
         """
-        return self._fee_amount
+        return self._feeAmount
 
     @property
-    def fee_currency(self) -> str:
+    def feeCurrency(self) -> str:
         """
         Property for the fee currency
 
         Returns:
             Currency the fee was paid in
         """
-        return self._fee_currency
+        return self._feeCurrency
 
     @property
     def method(self) -> str:
@@ -295,7 +290,7 @@ class FundManagement:
         return self._method
 
     @property
-    def tx_hash(self) -> str:
+    def txHash(self) -> str:
         """
         Property for the transaction hash for when the currency is a
         cryptocurrency - only shown for ETH and GUSD for withdrawals
@@ -303,7 +298,7 @@ class FundManagement:
         Returns:
             Transaction hash
         """
-        return self._tx_hash
+        return self._txHash
 
     @property
     def outputidx(self) -> int:
@@ -339,44 +334,24 @@ class FundManagement:
         return self._purpose
 
     @property
-    def tx_time(self) -> str:
+    def txTime(self) -> str:
         """
         Property for the time of custody fee record
 
         Returns:
             Time of custody fee record
         """
-        return self._tx_time
+        return self._txTime
 
     @property
-    def account_id(self) -> int:
-        """
-        Property for the custody account id
-
-        Returns:
-            Account id
-        """
-        return self._account_id
-
-    @property
-    def event_id(self) -> int:
-        """
-        Property for the custody fee event id
-
-        Returns:
-            Event id
-        """
-        return self._event_id
-
-    @property
-    def event_type(self) -> str:
+    def eventType(self) -> str:
         """
         Property for the custody fee event type
 
         Returns:
             Event type
         """
-        return self._event_type
+        return self._eventType
 
     @property
     def address(self) -> str:
@@ -421,7 +396,7 @@ class FundManagement:
         return self._fee
 
     @property
-    def withdrawal_id(self) -> str:
+    def withdrawalId(self) -> str:
         """
         Property for the withdrawal id - only shown for BTC, ZEC, LTC
         and BCH withdrawals
@@ -429,7 +404,7 @@ class FundManagement:
         Returns:
             Unique withdrawal id
         """
-        return self._withdrawal_id
+        return self._withdrawalId
 
     @property
     def message(self) -> str:
@@ -444,7 +419,7 @@ class FundManagement:
         return self._message
 
     @property
-    def is_override(self) -> bool:
+    def isOverride(self) -> bool:
         """
         Property for the value that shows if an override on the
         customer's account for free withdrawals exists
@@ -452,20 +427,20 @@ class FundManagement:
         Returns:
             True if override exists, False otherwise
         """
-        return self._is_override
+        return self._isOverride
 
     @property
-    def monthly_limit(self) -> int:
+    def monthlyLimit(self) -> int:
         """
         Property for the total number of allowable fee-free withdrawals
 
         Returns:
             Number of fee-free withdrawals
         """
-        return self._monthly_limit
+        return self._monthlyLimit
 
     @property
-    def montly_remaining(self) -> int:
+    def montlyRemaining(self) -> int:
         """
         Property for the total number of allowable fee-free withdrawals
         left to use
@@ -473,17 +448,17 @@ class FundManagement:
         Returns:
             Number of fee-free withdrawals left to use
         """
-        return self._monthly_remaining
+        return self._monthlyRemaining
 
     @property
-    def reference_id(self) -> str:
+    def referenceId(self) -> str:
         """
         Property for the reference id for the new bank addition request
 
         Returns:
             Reference id
         """
-        return self._reference_id
+        return self._referenceId
 
     @property
     def result(self) -> str:
