@@ -178,7 +178,7 @@ class FundManagement:
     def type(self) -> str:
         """
         Property for the type of account (always "exchange") or the
-        transfer type (either "Deposit" or "Withdrawal")
+        transfer type (either "Deposit", "Withdrawal", or "Reward")
 
         Returns:
             Type of account or transfer
@@ -281,7 +281,7 @@ class FundManagement:
     def method(self) -> str:
         """
         Property for the transfer - if fiat currency, the method field
-        will attempty to supply "ACH", "WIRE" or "SEN". If the transfer
+        will attempty to supply "ACH", "WIRE" or "CreditCard". If the transfer
         is internal, the method field will return "Internal"
 
         Returns:
@@ -506,7 +506,8 @@ class FundManagement:
 
     @classmethod
     def get_available_balances(
-        cls, auth: Authentication
+        cls, auth: Authentication,
+        account: List[str] = ["primary"],
     ) -> List[FundManagement]:
 
         """
@@ -520,7 +521,7 @@ class FundManagement:
         """
         path = "/v1/balances"
 
-        res = auth.make_request(endpoint=path)
+        res = auth.make_request(endpoint=path, data={"account": account})
 
         all_available_balances = []
 
@@ -532,7 +533,9 @@ class FundManagement:
 
     @classmethod
     def get_notional_balances(
-        cls, auth: Authentication, currency: str
+        cls, auth: Authentication, 
+        currency: str,
+        account: List[str] = ["primary"],
     ) -> List[FundManagement]:
 
         """
@@ -549,7 +552,7 @@ class FundManagement:
         """
         path = f"/v1/notionalbalances/{currency}"
 
-        res = auth.make_request(endpoint=path)
+        res = auth.make_request(endpoint=path, payload={"account": account})
 
         all_notional_balances = []
 
@@ -567,6 +570,7 @@ class FundManagement:
         show_completed_deposit_advances: bool = None,
         limit_transfers: int = None,
         currency: str = None,
+        account: List[str] = ["primary"],
     ) -> List[FundManagement]:
 
         """
@@ -590,7 +594,9 @@ class FundManagement:
         """
         path = "/v1/transfers"
 
-        data: Dict[str, Any] = {}
+        data: Dict[str, Any] = {
+            "account": account,
+		}
 
         if since is not None:
             data["timestamp"] = date_to_unix_ts(since)
@@ -619,6 +625,7 @@ class FundManagement:
         auth: Authentication,
         since: str = None,
         limit_transfers: int = None,
+        account: List[str] = ["primary"],
     ) -> List[FundManagement]:
 
         """
@@ -634,7 +641,9 @@ class FundManagement:
         """
         path = "/v1/custodyaccountfees"
 
-        data = {}
+        data: Dict[str, Any] = {
+            "account": account,
+		}
 
         if since is not None:
             data["timestamp"] = date_to_unix_ts(since)
@@ -653,7 +662,10 @@ class FundManagement:
 
     @classmethod
     def get_deposit_address(
-        cls, auth: Authentication, network: str, since: str = None
+        cls, auth: Authentication, 
+        network: str,
+        since: str = None,
+        account: List[str] = ["primary"],
     ) -> List[FundManagement]:
 
         """
@@ -672,7 +684,9 @@ class FundManagement:
         """
         path = f"/v1/addresses/{network}"
 
-        data = {}
+        data: Dict[str, Any] = {
+            "account": account,
+		}
 
         if since is not None:
             data["timestamp"] = date_to_unix_ts(since)
@@ -695,6 +709,7 @@ class FundManagement:
         label: str = None,
         since: str = None,
         legacy: bool = False,
+        account: List[str] = ["primary"],
     ) -> FundManagement:
 
         """
@@ -715,7 +730,9 @@ class FundManagement:
         """
         path = f"/v1/deposit/{network}/newAddress"
 
-        data: Dict[str, Any] = {}
+        data: Dict[str, Any] = {
+            "account": account,
+		}
 
         if since is not None:
             data["timestamp"] = date_to_unix_ts(since)
@@ -736,6 +753,7 @@ class FundManagement:
         address: str,
         amount: str,
         client_transfer_id: str = None,
+        account: List[str] = ["primary"],
     ) -> FundManagement:
 
         """
@@ -756,6 +774,7 @@ class FundManagement:
         data = {
             "address": address,
             "amount": amount,
+            "account": account,
         }
 
         if client_transfer_id is not None:
@@ -790,7 +809,11 @@ class FundManagement:
         """
         path = f"/v1/withdraw/{currency}/feeEstimate"
 
-        data = {"address": address, "amount": amount, "account": account}
+        data = {
+            "address": address, 
+            "amount": amount, 
+            "account": account
+        }
 
         res = auth.make_request(endpoint=path, payload=data)
 
@@ -804,6 +827,7 @@ class FundManagement:
         routing: str,
         type: str,
         name: str,
+        account: List[str] = ["primary"],
     ) -> FundManagement:
 
         """
@@ -827,6 +851,7 @@ class FundManagement:
             "routing": routing,
             "type": type,
             "name": name,
+            "account": account,
         }
 
         res = auth.make_request(endpoint=path, payload=data)
@@ -843,6 +868,7 @@ class FundManagement:
         name: str,
         institutionnumber: str = None,
         branchnumber: str = None,
+        account: List[str] = ["primary"],
     ) -> FundManagement:
 
         """
@@ -866,6 +892,7 @@ class FundManagement:
             "swiftcode": swiftcode,
             "type": type,
             "name": name,
+            "account": account,
         }
 
         if institutionnumber is not None:
@@ -881,6 +908,7 @@ class FundManagement:
     def get_payment_methods(
         cls,
         auth: Authentication,
+        account: List[str] = ["primary"],
     ) -> FundManagement:
 
         """
@@ -894,28 +922,6 @@ class FundManagement:
         """
         path = "/v1/payments/methods"
 
-        res = auth.make_request(endpoint=path)
-
-        return FundManagement(auth=auth, fund_data=res)
-
-    @classmethod
-    def sen_withdrawal(
-        cls, auth: Authentication, bankId: str, amount: float
-    ) -> FundManagement:
-
-        """
-        Method to withdraw USD via SEN
-
-        Args:
-            auth: Gemini authentication object
-            bankId: Unique ID for your SEN bank account
-            amount: Amount (USD) to transfer to your account
-
-        Returns:
-            FundManagement object
-        """
-        path = "/v1/payments/sen/withdraw"
-
-        res = auth.make_request(endpoint=path)
+        res = auth.make_request(endpoint=path, payload={"account": account})
 
         return FundManagement(auth=auth, fund_data=res)
