@@ -521,7 +521,7 @@ class FundManagement:
         """
         path = "/v1/balances"
 
-        res = auth.make_request(endpoint=path, data={"account": account})
+        res = auth.make_request(endpoint=path, payload={"account": account})
 
         all_available_balances = []
 
@@ -908,7 +908,7 @@ class FundManagement:
     def get_payment_methods(
         cls,
         auth: Authentication,
-        account: List[str] = ["primary"],
+        account: str = "primary",
     ) -> FundManagement:
 
         """
