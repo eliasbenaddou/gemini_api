@@ -576,6 +576,7 @@ class Order:
         stop_limit: bool = False,
         stop_price: Optional[str] = None,
         client_order_id: str = None,
+        account: List[str] = ["primary"],
     ) -> Order:
         """
         Method to create a new limit or stop-limit order
@@ -602,6 +603,7 @@ class Order:
             "side": side,
             "options": options,
             "type": "exchange limit",
+            "account": account,
         }
         if stop_limit:
             data["type"] = "exchange stop limit"
@@ -618,6 +620,7 @@ class Order:
         cls,
         auth: Authentication,
         order_id: str,
+        account: List[str] = ["primary"],
     ) -> Order:
         """
         Method to cancel an order
@@ -631,7 +634,7 @@ class Order:
         """
         path = "/v1/order/cancel"
 
-        data = {"order_id": order_id}
+        data = {"order_id": order_id, "account": account}
         res = auth.make_request(endpoint=path, payload=data)
         return Order(auth=auth, order_data=res)
 
@@ -643,6 +646,7 @@ class Order:
         side: str,
         symbol: str,
         client_order_id: str = None,
+        account: List[str] = ["primary"],
     ) -> Order:
         """
         Method to wrap or unwrap Gemini isued assets
@@ -663,6 +667,7 @@ class Order:
             "amount": amount,
             "side": side,
             "client_order_id": client_order_id,
+            "account": account,
         }
 
         if client_order_id is not None:
@@ -675,6 +680,7 @@ class Order:
     def cancel_session_orders(
         cls,
         auth: Authentication,
+        account: List[str] = ["primary"],
     ) -> List[Order]:
 
         """
@@ -688,7 +694,7 @@ class Order:
         """
         path = "/v1/order/cancel/session"
 
-        res = auth.make_request(endpoint=path)
+        res = auth.make_request(endpoint=path, payload={"account": account})
 
         all_cancelled_session_orders = []
         orders: Dict[str, Any] = {}
@@ -716,6 +722,7 @@ class Order:
     def cancel_active_orders(
         cls,
         auth: Authentication,
+        account: List[str] = ["primary"],
     ) -> List[Order]:
 
         """
@@ -729,7 +736,7 @@ class Order:
         """
         path = "/v1/order/cancel/all"
 
-        res = auth.make_request(endpoint=path)
+        res = auth.make_request(endpoint=path, payload={"account": account})
 
         all_cancelled_active_orders = []
         orders: Dict[str, Any] = {}
@@ -760,6 +767,7 @@ class Order:
         order_id: str,
         include_trades: bool,
         client_order_id: str = None,
+        account: List[str] = ["primary"],
     ) -> Order:
 
         """
@@ -782,6 +790,7 @@ class Order:
         data = {
             "order_id": order_id,
             "include_trades": include_trades,
+            "account": account,
         }
 
         if client_order_id is not None:
@@ -791,7 +800,10 @@ class Order:
         return Order(auth=auth, order_data=res)
 
     @classmethod
-    def get_active_orders(cls, auth: Authentication, account: List[str] = ["primary"]) -> List[Order]:
+    def get_active_orders(
+        cls, auth: Authentication,
+        account: List[str] = ["primary"],
+    ) -> List[Order]:
 
         """
         Method to get active orders

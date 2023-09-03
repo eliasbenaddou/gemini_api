@@ -68,9 +68,7 @@ class Authentication(object):
         request_url = self._url + endpoint
 
         payload["request"] = endpoint
-        payload["nonce"] = str(
-            int(time.mktime(datetime.now().timetuple()) * 1000)
-        )
+        payload["nonce"] = str(int(time.time()))
 
         encoded_payload = json.dumps(payload).encode("utf-8")
         b64 = base64.b64encode(encoded_payload)
