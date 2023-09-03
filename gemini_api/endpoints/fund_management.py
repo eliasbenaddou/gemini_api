@@ -880,7 +880,7 @@ class FundManagement:
         Returns:
 			FundManagement object
         '''
-        path = f"/v1/account/transfer/{currency.lower()}"
+        path = f"/v1/account/transfer/{currency}"
         
         data = {
             "sourceAccount": source_account,
