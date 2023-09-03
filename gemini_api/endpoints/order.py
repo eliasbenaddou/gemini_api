@@ -791,7 +791,7 @@ class Order:
         return Order(auth=auth, order_data=res)
 
     @classmethod
-    def get_active_orders(cls, auth: Authentication) -> List[Order]:
+    def get_active_orders(cls, auth: Authentication, account: List[str] = ["primary"]) -> List[Order]:
 
         """
         Method to get active orders
@@ -804,7 +804,7 @@ class Order:
         """
         path = "/v1/orders"
 
-        res = auth.make_request(endpoint=path)
+        res = auth.make_request(endpoint=path, payload={"account": account})
 
         all_active_orders = []
 
@@ -821,6 +821,8 @@ class Order:
         symbol: str,
         since: str = None,
         limit_trades: int = None,
+        timestamp: int = None,
+        account: List[str] = ["primary"],
     ) -> List[Order]:
 
         """
@@ -839,6 +841,8 @@ class Order:
 
         data: Dict[str, Any] = {
             "symbol": symbol,
+            "account": account,
+            "timestamp": timestamp,
         }
 
         if since is not None:
