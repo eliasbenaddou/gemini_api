@@ -798,6 +798,7 @@ class Order:
 
         Args:
             auth: Gemini authentication object
+            account: The name of the account within the subaccount group
 
         Returns:
             List of Order objects
@@ -833,6 +834,8 @@ class Order:
             symbol: Trading pair
             since: Date in YYYYMMDD format
             limit_trades: Maximum number of trades to return, min 50 max 500
+            timestamp: Timestamp in milliseconds
+            account: The name of the account within the subaccount group
 
         Returns:
             List of Order objects

@@ -48,6 +48,9 @@ class FundManagement:
         "_message",
         "_balances",
         "_banks",
+        "_fromAccount",
+        "_toAccount",
+        "_uuid",
     ]
 
     def __init__(
@@ -133,6 +136,12 @@ class FundManagement:
             self._reason: str = fund_data["reason"]
         if "message" in fund_data:
             self._message: str = fund_data["message"]
+        if "fromAccount" in fund_data:
+            self._fromAccount: str = fund_data["fromAccount"]
+        if "toAccount" in fund_data:
+            self._toAccount: str = fund_data["toAccount"]
+        if "uuid" in fund_data:
+            self._uuid: str = fund_data["uuid"]
 
     @property
     def currency(self) -> str:
@@ -503,7 +512,33 @@ class FundManagement:
             List of bank dictionaries
         """
         return self._banks
+    @property
+    def fromAccount(self) -> str:
+        """
+		Property for the account you are transferring from
 
+		Returns:
+			Account you are transferring from
+		"""
+        return self._fromAccount
+    @property
+    def toAccount(self) -> str:
+        """
+		Property for the account you are transferring to
+        
+		Returns:
+			Account you are transferring to
+        """
+        return self._toAccount
+    @property
+    def uuid(self) -> str:
+        """
+        Property for the unique identifier for the internal transfer
+
+        Returns:
+			Unique identifier for the internal transfer
+        """
+        return self._uuid
     @classmethod
     def get_available_balances(
         cls, auth: Authentication
@@ -794,6 +829,46 @@ class FundManagement:
 
         res = auth.make_request(endpoint=path, payload=data)
 
+        return FundManagement(auth=auth, fund_data=res)
+    
+    @classmethod
+    def internal_transfers(
+        cls,
+        auth: Authentication,
+        source_account: str,
+        target_account: str,
+        currency: str,
+		amount: str,
+        client_transfer_id: str = None,
+        withdrawal_id: str = None,
+	) -> FundManagement:
+        '''
+        Method that allows you to execute an internal transfer between any two accounts within your Master Group.
+        
+        Args:
+			auth: Gemini authentication object
+			source_account: Nickname of the account you are transferring from. 
+			target_account: Nickname of the account you are transferring to.
+            currency: Currency code of a supported cryptocurrency or fiat, e.g. eth, usd, gusd, btc, etc.
+			amount: Quoted decimal amount to withdraw.
+			client_transfer_id: Optional. A unique identifier for the internal transfer, in uuid4 format.
+			withdrawal_id: Optional. Unique ID of the requested withdrawal.
+            
+        Returns:
+			FundManagement object
+        '''
+        path = f"/v1/account/transfer/{currency.lower()}"
+        
+        data = {
+            "sourceAccount": source_account,
+            "targetAccount": target_account,
+            "amount": amount,
+            "clientTransferId": client_transfer_id,
+            "withdrawalId": withdrawal_id,
+		}
+        
+        res = auth.make_request(endpoint=path, payload=data)
+        
         return FundManagement(auth=auth, fund_data=res)
 
     @classmethod
