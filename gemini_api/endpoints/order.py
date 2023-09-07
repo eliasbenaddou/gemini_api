@@ -661,7 +661,7 @@ class Order:
         Returns:
             Order object
         """
-        path = f"/v1/order/{symbol}"
+        path = f"/v1/wrap/{symbol}"
 
         data = {
             "amount": amount,
