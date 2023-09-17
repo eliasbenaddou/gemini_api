@@ -88,5 +88,7 @@ class Authentication(object):
         request = requests.post(
             request_url, data=None, headers=request_headers
         )
+        if request.raise_for_status() is not None:
+            raise Exception(request.raise_for_status())
         data = request.json()
         return data
