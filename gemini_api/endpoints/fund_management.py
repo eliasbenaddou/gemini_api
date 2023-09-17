@@ -842,7 +842,7 @@ class FundManagement:
         Returns:
             FundManagement object
         """
-        path = f"/v1/withdraw/{currency}/feeEstimate"
+        path = f"/v1/withdraw/{currency.lower()}/feeEstimate"
 
         data = {
             "address": address, 
