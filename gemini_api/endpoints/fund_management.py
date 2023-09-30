@@ -15,40 +15,42 @@ class FundManagement:
         "_currency",
         "_amount",
         "_available",
-        "_available_for_withdrawal",
+        "_availableForWithdrawal",
         "_type",
-        "_amount_notional",
-        "_available_notional",
-        "_available_for_withdrawal_notional",
+        "_amountNotional",
+        "_availableNotional",
+        "_availableForWithdrawalNotional",
         "_status",
         "_timestampms",
         "_eid",
-        "_advance_eid",
-        "_fee_amount",
+        "_advanceEid",
+        "_feeAmount",
         "_fee_currency",
         "_method",
         "_tx_hash",
         "_outputidx",
         "_destination",
         "_purpose",
-        "_tx_time",
-        "_account_id",
-        "_event_id" "_event_type",
+        "_txTime",
+        "_eventType",
         "_address",
         "_label",
         "_network",
         "_fee",
-        "_withdrawal_id",
+        "_withdrawalId",
         "_message",
-        "_is_override",
-        "_monthly_limit",
-        "_monthly_remaining",
-        "_reference_id",
+        "_isOverride",
+        "_monthlyLimit",
+        "_monthlyRemaining",
+        "_referenceId",
         "_result",
         "_reason",
         "_message",
         "_balances",
         "_banks",
+        "_fromAccount",
+        "_toAccount",
+        "_uuid",
     ]
 
     def __init__(
@@ -64,17 +66,17 @@ class FundManagement:
         if "available" in fund_data:
             self._available: float = fund_data["available"]
         if "availableForWithdrawal" in fund_data:
-            self._available_for_withdrawal: float = fund_data[
+            self._availableForWithdrawal: float = fund_data[
                 "availableForWithdrawal"
             ]
         if "type" in fund_data:
             self._type: str = fund_data["type"]
         if "amountNotional" in fund_data:
-            self._amount_notional: float = fund_data["amountNotional"]
+            self._amountNotional: float = fund_data["amountNotional"]
         if "availableNotional" in fund_data:
-            self._available_notional: float = fund_data["availableNotional"]
+            self._availableNotional: float = fund_data["availableNotional"]
         if "availableForWithdrawalNotional" in fund_data:
-            self._available_for_withdrawal_notional: float = fund_data[
+            self._availableForWithdrawalNotional: float = fund_data[
                 "availableForWithdrawalNotional"
             ]
         if "status" in fund_data:
@@ -84,15 +86,15 @@ class FundManagement:
         if "eid" in fund_data:
             self._eid: int = fund_data["eid"]
         if "advanceEid" in fund_data:
-            self._advance_eid: int = fund_data["advanceEid"]
+            self._advanceEid: int = fund_data["advanceEid"]
         if "feeAmount" in fund_data:
-            self._fee_amount: int = fund_data["feeAmount"]
+            self._feeAmount: int = fund_data["feeAmount"]
         if "feeCurrency" in fund_data:
-            self._fee_currency: str = fund_data["feeCurrency"]
+            self._feeCurrency: str = fund_data["feeCurrency"]
         if "method" in fund_data:
             self._method: str = fund_data["method"]
         if "txHash" in fund_data:
-            self._tx_hash: str = fund_data["txHash"]
+            self._txHash: str = fund_data["txHash"]
         if "outputIdx" in fund_data:
             self._outputidx: int = fund_data["outputidx"]
         if "destination" in fund_data:
@@ -100,13 +102,9 @@ class FundManagement:
         if "purpose" in fund_data:
             self._purpose: str = fund_data["purpose"]
         if "txTime" in fund_data:
-            self._tx_time: str = fund_data["txTime"]
-        if "accountId" in fund_data:
-            self._account_id: int = fund_data["accountId"]
-        if "eventId" in fund_data:
-            self._event_id: int = fund_data["eventId"]
+            self._txTime: str = fund_data["txTime"]
         if "eventType" in fund_data:
-            self._event_type: str = fund_data["eventType"]
+            self._eventType: str = fund_data["eventType"]
         if "address" in fund_data:
             self._address: str = fund_data["address"]
         if "label" in fund_data:
@@ -119,15 +117,15 @@ class FundManagement:
             else:
                 self._fee = fund_data["fee"]
         if "withdrawalID" in fund_data:
-            self._withdrawal_id: str = fund_data["withdrawalID"]
+            self._withdrawalID: str = fund_data["withdrawalID"]
         if "isOverride" in fund_data:
-            self._is_override: bool = fund_data["is_override"]
+            self._isOverride: bool = fund_data["isOverride"]
         if "monthlyLimit" in fund_data:
-            self._monthly_limit: int = fund_data["monthly_limit"]
+            self._monthlyLimit: int = fund_data["monthlyLimit"]
         if "montlyRemaining" in fund_data:
-            self._monthly_remaining: int = fund_data["montly_remaining"]
+            self._monthlyRemaining: int = fund_data["montlyRemaining"]
         if "referenceId" in fund_data:
-            self._reference_id: str = fund_data["reference_id"]
+            self._referenceId: str = fund_data["referenceId"]
         if "balances" in fund_data:
             self._balances: List[Dict[str, str]] = fund_data["balances"]
         if "banks" in fund_data:
@@ -138,6 +136,12 @@ class FundManagement:
             self._reason: str = fund_data["reason"]
         if "message" in fund_data:
             self._message: str = fund_data["message"]
+        if "fromAccount" in fund_data:
+            self._fromAccount: str = fund_data["fromAccount"]
+        if "toAccount" in fund_data:
+            self._toAccount: str = fund_data["toAccount"]
+        if "uuid" in fund_data:
+            self._uuid: str = fund_data["uuid"]
 
     @property
     def currency(self) -> str:
@@ -170,20 +174,20 @@ class FundManagement:
         return self._available
 
     @property
-    def available_for_withdrawal(self) -> float:
+    def availableForWithdrawal(self) -> float:
         """
         Property for the amount that is available to withdraw
 
         Returns:
             Amount available to withdraw
         """
-        return self._available_for_withdrawal
+        return self._availableForWithdrawal
 
     @property
-    def account_transfer_type(self) -> str:
+    def type(self) -> str:
         """
         Property for the type of account (always "exchange") or the
-        transfer type (either "Deposit" or "Withdrawal")
+        transfer type (either "Deposit", "Withdrawal", or "Reward")
 
         Returns:
             Type of account or transfer
@@ -191,34 +195,34 @@ class FundManagement:
         return self._type
 
     @property
-    def amount_notional(self) -> float:
+    def amountNotional(self) -> float:
         """
         Property for the amount in notional
 
         Returns:
             Notional amount
         """
-        return self._amount_notional
+        return self._amountNotional
 
     @property
-    def available_notional(self) -> float:
+    def availableNotional(self) -> float:
         """
         Property for the amount available to trade in notional
 
         Returns:
             Amount available in notional
         """
-        return self._available_notional
+        return self._availableNotional
 
     @property
-    def available_for_withdrawal_notional(self) -> float:
+    def availableForWithdrawalNotional(self) -> float:
         """
         Property for the amount available to withdraw in notional
 
         Returns:
             Amount available to withdraw in notional
         """
-        return self._available_for_withdrawal_notional
+        return self._availableForWithdrawalNotional
 
     @property
     def status(self) -> str:
@@ -253,40 +257,40 @@ class FundManagement:
         return self._eid
 
     @property
-    def advance_eid(self) -> int:
+    def advanceEid(self) -> int:
         """
         Property for the deposit advance event id
 
         Returns:
             Deposit advance event id
         """
-        return self._advance_eid
+        return self._advanceEid
 
     @property
-    def fee_amount(self) -> float:
+    def feeAmount(self) -> float:
         """
         Property for the fee amount charged
 
         Returns:
             Fee amount
         """
-        return self._fee_amount
+        return self._feeAmount
 
     @property
-    def fee_currency(self) -> str:
+    def feeCurrency(self) -> str:
         """
         Property for the fee currency
 
         Returns:
             Currency the fee was paid in
         """
-        return self._fee_currency
+        return self._feeCurrency
 
     @property
     def method(self) -> str:
         """
         Property for the transfer - if fiat currency, the method field
-        will attempty to supply "ACH", "WIRE" or "SEN". If the transfer
+        will attempty to supply "ACH", "WIRE" or "CreditCard". If the transfer
         is internal, the method field will return "Internal"
 
         Returns:
@@ -295,7 +299,7 @@ class FundManagement:
         return self._method
 
     @property
-    def tx_hash(self) -> str:
+    def txHash(self) -> str:
         """
         Property for the transaction hash for when the currency is a
         cryptocurrency - only shown for ETH and GUSD for withdrawals
@@ -303,7 +307,7 @@ class FundManagement:
         Returns:
             Transaction hash
         """
-        return self._tx_hash
+        return self._txHash
 
     @property
     def outputidx(self) -> int:
@@ -339,44 +343,24 @@ class FundManagement:
         return self._purpose
 
     @property
-    def tx_time(self) -> str:
+    def txTime(self) -> str:
         """
         Property for the time of custody fee record
 
         Returns:
             Time of custody fee record
         """
-        return self._tx_time
+        return self._txTime
 
     @property
-    def account_id(self) -> int:
-        """
-        Property for the custody account id
-
-        Returns:
-            Account id
-        """
-        return self._account_id
-
-    @property
-    def event_id(self) -> int:
-        """
-        Property for the custody fee event id
-
-        Returns:
-            Event id
-        """
-        return self._event_id
-
-    @property
-    def event_type(self) -> str:
+    def eventType(self) -> str:
         """
         Property for the custody fee event type
 
         Returns:
             Event type
         """
-        return self._event_type
+        return self._eventType
 
     @property
     def address(self) -> str:
@@ -421,7 +405,7 @@ class FundManagement:
         return self._fee
 
     @property
-    def withdrawal_id(self) -> str:
+    def withdrawalId(self) -> str:
         """
         Property for the withdrawal id - only shown for BTC, ZEC, LTC
         and BCH withdrawals
@@ -429,7 +413,7 @@ class FundManagement:
         Returns:
             Unique withdrawal id
         """
-        return self._withdrawal_id
+        return self._withdrawalId
 
     @property
     def message(self) -> str:
@@ -444,7 +428,7 @@ class FundManagement:
         return self._message
 
     @property
-    def is_override(self) -> bool:
+    def isOverride(self) -> bool:
         """
         Property for the value that shows if an override on the
         customer's account for free withdrawals exists
@@ -452,20 +436,20 @@ class FundManagement:
         Returns:
             True if override exists, False otherwise
         """
-        return self._is_override
+        return self._isOverride
 
     @property
-    def monthly_limit(self) -> int:
+    def monthlyLimit(self) -> int:
         """
         Property for the total number of allowable fee-free withdrawals
 
         Returns:
             Number of fee-free withdrawals
         """
-        return self._monthly_limit
+        return self._monthlyLimit
 
     @property
-    def montly_remaining(self) -> int:
+    def montlyRemaining(self) -> int:
         """
         Property for the total number of allowable fee-free withdrawals
         left to use
@@ -473,17 +457,17 @@ class FundManagement:
         Returns:
             Number of fee-free withdrawals left to use
         """
-        return self._monthly_remaining
+        return self._monthlyRemaining
 
     @property
-    def reference_id(self) -> str:
+    def referenceId(self) -> str:
         """
         Property for the reference id for the new bank addition request
 
         Returns:
             Reference id
         """
-        return self._reference_id
+        return self._referenceId
 
     @property
     def result(self) -> str:
@@ -528,10 +512,37 @@ class FundManagement:
             List of bank dictionaries
         """
         return self._banks
+    @property
+    def fromAccount(self) -> str:
+        """
+		Property for the account you are transferring from
 
+		Returns:
+			Account you are transferring from
+		"""
+        return self._fromAccount
+    @property
+    def toAccount(self) -> str:
+        """
+		Property for the account you are transferring to
+        
+		Returns:
+			Account you are transferring to
+        """
+        return self._toAccount
+    @property
+    def uuid(self) -> str:
+        """
+        Property for the unique identifier for the internal transfer
+
+        Returns:
+			Unique identifier for the internal transfer
+        """
+        return self._uuid
     @classmethod
     def get_available_balances(
-        cls, auth: Authentication
+        cls, auth: Authentication,
+        account: List[str] = ["primary"],
     ) -> List[FundManagement]:
 
         """
@@ -545,7 +556,7 @@ class FundManagement:
         """
         path = "/v1/balances"
 
-        res = auth.make_request(endpoint=path)
+        res = auth.make_request(endpoint=path, payload={"account": account})
 
         all_available_balances = []
 
@@ -557,7 +568,9 @@ class FundManagement:
 
     @classmethod
     def get_notional_balances(
-        cls, auth: Authentication, currency: str
+        cls, auth: Authentication, 
+        currency: str,
+        account: List[str] = ["primary"],
     ) -> List[FundManagement]:
 
         """
@@ -574,7 +587,7 @@ class FundManagement:
         """
         path = f"/v1/notionalbalances/{currency}"
 
-        res = auth.make_request(endpoint=path)
+        res = auth.make_request(endpoint=path, payload={"account": account})
 
         all_notional_balances = []
 
@@ -592,6 +605,7 @@ class FundManagement:
         show_completed_deposit_advances: bool = None,
         limit_transfers: int = None,
         currency: str = None,
+        account: List[str] = ["primary"],
     ) -> List[FundManagement]:
 
         """
@@ -615,7 +629,9 @@ class FundManagement:
         """
         path = "/v1/transfers"
 
-        data: Dict[str, Any] = {}
+        data: Dict[str, Any] = {
+            "account": account,
+		}
 
         if since is not None:
             data["timestamp"] = date_to_unix_ts(since)
@@ -644,6 +660,7 @@ class FundManagement:
         auth: Authentication,
         since: str = None,
         limit_transfers: int = None,
+        account: List[str] = ["primary"],
     ) -> List[FundManagement]:
 
         """
@@ -659,7 +676,9 @@ class FundManagement:
         """
         path = "/v1/custodyaccountfees"
 
-        data = {}
+        data: Dict[str, Any] = {
+            "account": account,
+		}
 
         if since is not None:
             data["timestamp"] = date_to_unix_ts(since)
@@ -678,7 +697,10 @@ class FundManagement:
 
     @classmethod
     def get_deposit_address(
-        cls, auth: Authentication, network: str, since: str = None
+        cls, auth: Authentication, 
+        network: str,
+        since: str = None,
+        account: List[str] = ["primary"],
     ) -> List[FundManagement]:
 
         """
@@ -697,7 +719,9 @@ class FundManagement:
         """
         path = f"/v1/addresses/{network}"
 
-        data = {}
+        data: Dict[str, Any] = {
+            "account": account,
+		}
 
         if since is not None:
             data["timestamp"] = date_to_unix_ts(since)
@@ -720,6 +744,7 @@ class FundManagement:
         label: str = None,
         since: str = None,
         legacy: bool = False,
+        account: List[str] = ["primary"],
     ) -> FundManagement:
 
         """
@@ -740,7 +765,9 @@ class FundManagement:
         """
         path = f"/v1/deposit/{network}/newAddress"
 
-        data: Dict[str, Any] = {}
+        data: Dict[str, Any] = {
+            "account": account,
+		}
 
         if since is not None:
             data["timestamp"] = date_to_unix_ts(since)
@@ -761,6 +788,7 @@ class FundManagement:
         address: str,
         amount: str,
         client_transfer_id: str = None,
+        account: List[str] = ["primary"],
     ) -> FundManagement:
 
         """
@@ -781,6 +809,7 @@ class FundManagement:
         data = {
             "address": address,
             "amount": amount,
+            "account": account,
         }
 
         if client_transfer_id is not None:
@@ -813,12 +842,56 @@ class FundManagement:
         Returns:
             FundManagement object
         """
-        path = f"/v1/withdraw/{currency}/feeEstimate"
+        path = f"/v1/withdraw/{currency.lower()}/feeEstimate"
 
-        data = {"address": address, "amount": amount, "account": account}
+        data = {
+            "address": address, 
+            "amount": amount, 
+            "account": account
+        }
 
         res = auth.make_request(endpoint=path, payload=data)
 
+        return FundManagement(auth=auth, fund_data=res)
+    
+    @classmethod
+    def internal_transfers(
+        cls,
+        auth: Authentication,
+        source_account: str,
+        target_account: str,
+        currency: str,
+		amount: str,
+        client_transfer_id: str = None,
+        withdrawal_id: str = None,
+	) -> FundManagement:
+        '''
+        Method that allows you to execute an internal transfer between any two accounts within your Master Group.
+        
+        Args:
+			auth: Gemini authentication object
+			source_account: Nickname of the account you are transferring from. 
+			target_account: Nickname of the account you are transferring to.
+            currency: Currency code of a supported cryptocurrency or fiat, e.g. eth, usd, gusd, btc, etc.
+			amount: Quoted decimal amount to withdraw.
+			client_transfer_id: Optional. A unique identifier for the internal transfer, in uuid4 format.
+			withdrawal_id: Optional. Unique ID of the requested withdrawal.
+            
+        Returns:
+			FundManagement object
+        '''
+        path = f"/v1/account/transfer/{currency}"
+        
+        data = {
+            "sourceAccount": source_account,
+            "targetAccount": target_account,
+            "amount": amount,
+            "clientTransferId": client_transfer_id,
+            "withdrawalId": withdrawal_id,
+		}
+        
+        res = auth.make_request(endpoint=path, payload=data)
+        
         return FundManagement(auth=auth, fund_data=res)
 
     @classmethod
@@ -829,6 +902,7 @@ class FundManagement:
         routing: str,
         type: str,
         name: str,
+        account: List[str] = ["primary"],
     ) -> FundManagement:
 
         """
@@ -852,6 +926,7 @@ class FundManagement:
             "routing": routing,
             "type": type,
             "name": name,
+            "account": account,
         }
 
         res = auth.make_request(endpoint=path, payload=data)
@@ -868,6 +943,7 @@ class FundManagement:
         name: str,
         institutionnumber: str = None,
         branchnumber: str = None,
+        account: List[str] = ["primary"],
     ) -> FundManagement:
 
         """
@@ -891,6 +967,7 @@ class FundManagement:
             "swiftcode": swiftcode,
             "type": type,
             "name": name,
+            "account": account,
         }
 
         if institutionnumber is not None:
@@ -906,6 +983,7 @@ class FundManagement:
     def get_payment_methods(
         cls,
         auth: Authentication,
+        account: str = "primary",
     ) -> FundManagement:
 
         """
@@ -919,28 +997,6 @@ class FundManagement:
         """
         path = "/v1/payments/methods"
 
-        res = auth.make_request(endpoint=path)
-
-        return FundManagement(auth=auth, fund_data=res)
-
-    @classmethod
-    def sen_withdrawal(
-        cls, auth: Authentication, bankId: str, amount: float
-    ) -> FundManagement:
-
-        """
-        Method to withdraw USD via SEN
-
-        Args:
-            auth: Gemini authentication object
-            bankId: Unique ID for your SEN bank account
-            amount: Amount (USD) to transfer to your account
-
-        Returns:
-            FundManagement object
-        """
-        path = "/v1/payments/sen/withdraw"
-
-        res = auth.make_request(endpoint=path)
+        res = auth.make_request(endpoint=path, payload={"account": account})
 
         return FundManagement(auth=auth, fund_data=res)
